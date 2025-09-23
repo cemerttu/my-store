@@ -8,13 +8,12 @@ import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import "./index.css";
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <main className="flex-grow-1">
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />

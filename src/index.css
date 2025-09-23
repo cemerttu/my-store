@@ -1,11 +1,54 @@
-/* Featured Product Card Hover Effects */
+/* Reset some browser defaults */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Navbar */
+.navbar {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero section with background image */
+.hero-section {
+  background: url("/images/hero-bg.jpg") no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-section p {
+  font-size: 1.25rem;
+}
+
+/* Featured products */
 .product-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .product-card:hover {
-  transform: translateY(-8px); /* lift effect */
+  transform: translateY(-8px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -14,5 +57,35 @@
 }
 
 .product-card:hover .product-img {
-  transform: scale(1.1); /* zoom in effect */
+  transform: scale(1.1);
+}
+
+/* Buttons */
+.btn-dark {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-dark:hover {
+  background-color: #343a40;
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  background-color: #212529;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
 }
