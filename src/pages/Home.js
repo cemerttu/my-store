@@ -1,16 +1,21 @@
 import React from "react";
-import FeaturedProducts from "../components/FeaturedProducts";
+import ProductCard from "../components/ProductCard";
+
+const products = [
+  { id: 1, name: "Product 1", price: 49.99, image: "/images/product1.jpg" },
+  { id: 2, name: "Product 2", price: 59.99, image: "/images/product2.jpg" },
+  { id: 3, name: "Product 3", price: 79.99, image: "/images/product3.jpg" },
+];
 
 const Home = () => (
-  <>
-    <section className="hero-section">
-      <div className="hero-overlay text-white">
-        <h1>Welcome to MyStore</h1>
-        <p className="lead">Your one-stop shop for amazing products</p>
-        <a href="/shop" className="btn btn-light btn-lg">Shop Now</a>
-      </div>
-    </section>
-    <FeaturedProducts />
-  </>
+  <div className="container my-5">
+    <h1 className="text-center mb-4">Featured Products</h1>
+    <div className="row g-4">
+      {products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  </div>
 );
+
 export default Home;
