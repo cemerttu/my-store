@@ -1,20 +1,19 @@
 body {
-  font-family: 'Poppins', sans-serif;
-  background: #f8f9fa;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
 }
 
-.hero {
-  background-size: cover;
-  background-position: center;
-  height: 50vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color: white;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+main {
+  min-height: 80vh;
+  padding: 20px;
 }
 
-.card-img-top {
-  height: 220px;
-  object-fit: cover;
+h1, h2, h3, h4, h5 {
+  font-weight: bold;
+}
+
+footer {
+  margin-top: auto;
 }
