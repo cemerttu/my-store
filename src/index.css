@@ -1,3 +1,29 @@
+/* ===== Custom Why Choose MyStore Section ===== */
+.why-choose-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: none;
+  position: relative;
+  margin: 40px 0;
+}
+.why-choose-hero img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.15);
+  margin-bottom: 32px;
+}
+.why-choose-hero-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.08);
+}
 /* ===== Reset & Base Styles ===== */
 body {
   margin: 0;
