@@ -2,17 +2,46 @@ import React from "react";
 import ProductCard from "../components/ProductCard";
 
 const products = [
-  { id: 1, name: "Product 1", price: 49.99, image: "/images/product1.jpg" },
-  { id: 2, name: "Product 2", price: 59.99, image: "/images/product2.jpg" },
-  { id: 3, name: "Product 3", price: 79.99, image: "/images/product3.jpg" },
+  { id: 1, name: "Wireless Headphones", price: 49.99, image: "https://via.placeholder.com/300x300/007bff/ffffff?text=Headphones", category: "Electronics" },
+  { id: 2, name: "Smart Watch", price: 59.99, image: "https://via.placeholder.com/300x300/28a745/ffffff?text=Smart+Watch", category: "Electronics" },
+  { id: 3, name: "Laptop Backpack", price: 79.99, image: "https://via.placeholder.com/300x300/dc3545/ffffff?text=Backpack", category: "Accessories" },
 ];
 
 const Home = () => (
   <div className="container my-5">
-    <h1 className="text-center mb-4">Featured Products</h1>
+    <div className="text-center mb-5">
+      <h2 className="fw-bold mb-3">Why Choose MyStore?</h2>
+      <div className="row">
+        <div className="col-md-4 mb-4">
+          <div className="p-4">
+            <i className="fas fa-shipping-fast fa-3x text-primary mb-3"></i>
+            <h5>Free Shipping</h5>
+            <p className="text-muted">Free shipping on orders over $50</p>
+          </div>
+        </div>
+        <div className="col-md-4 mb-4">
+          <div className="p-4">
+            <i className="fas fa-shield-alt fa-3x text-success mb-3"></i>
+            <h5>Secure Payment</h5>
+            <p className="text-muted">100% secure payment processing</p>
+          </div>
+        </div>
+        <div className="col-md-4 mb-4">
+          <div className="p-4">
+            <i className="fas fa-headset fa-3x text-info mb-3"></i>
+            <h5>24/7 Support</h5>
+            <p className="text-muted">Round-the-clock customer support</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <h2 className="text-center mb-4">Best Sellers</h2>
     <div className="row g-4">
       {products.map(product => (
-        <ProductCard key={product.id} product={product} />
+        <div className="col-lg-4 col-md-6" key={product.id}>
+          <ProductCard product={product} />
+        </div>
       ))}
     </div>
   </div>
