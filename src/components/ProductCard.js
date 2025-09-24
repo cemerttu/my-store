@@ -1,35 +1,37 @@
-import React from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const productData = {
-  1: { name: "Product 1", price: 49.99, description: "High-quality product 1", image: "/images/product1.jpg" },
-  2: { name: "Product 2", price: 59.99, description: "Durable and stylish product 2", image: "/images/product2.jpg" },
-  3: { name: "Product 3", price: 79.99, description: "Premium quality product 3", image: "/images/product3.jpg" },
-};
-
-const Product = () => {
-  const { id } = useParams();
-  const product = productData[id];
-
-  if (!product) {
-    return <h2 className="text-center my-5">Product not found</h2>;
-  }
+const ProductCard = ({ product }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="container my-5">
-      <div className="row">
-        <div className="col-md-6">
-          <img src={product.image} alt={product.name} className="img-fluid rounded shadow" />
+    <div 
+      className="card product-card h-100 border-0 shadow-sm"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="position-relative overflow-hidden">
+        <img
+          src={product.image}
+          className={`card-img-top product-img ${isHovered ? 'zoom' : ''}`}
+          alt={product.name}
+        />
+        <div className={`card-img-overlay d-flex justify-content-end ${isHovered ? 'show' : 'hide'}`}>
+          <button className="btn btn-light btn-sm rounded-circle shadow">
+            <i className="fas fa-heart text-danger"></i>
+          </button>
         </div>
-        <div className="col-md-6">
-          <h1>{product.name}</h1>
-          <p className="text-muted">${product.price}</p>
-          <p>{product.description}</p>
-          <Link to="/cart" className="btn btn-primary">Add to Cart</Link>
-        </div>
+      </div>
+      <div className="card-body text-center">
+        <h5 className="card-title">{product.name}</h5>
+        <p className="text-muted">{product.category}</p>
+        <p className="fw-bold text-primary">${product.price}</p>
+        <Link to={`/product/${product.id}`} className="btn btn-outline-primary w-100">
+          View Details
+        </Link>
       </div>
     </div>
   );
 };
 
-export default Product;
+export default ProductCard;
