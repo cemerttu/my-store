@@ -39,14 +39,14 @@ const Home = () => (
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6">
-            <h1 className="display-4 fw-bold mb-4">Welcome to MyStore</h1>
-            <p className="lead mb-4">Discover amazing products at unbeatable prices. Quality and satisfaction guaranteed.</p>
+            <h1 className="display-4 fw-bold mb-4">Welcome to TechNest</h1>
+            <p className="lead mb-4">Discover amazing tech products at unbeatable prices. Quality and satisfaction guaranteed.</p>
             <Link to="/shop" className="btn btn-light btn-lg">Shop Now</Link>
           </div>
           <div className="col-lg-6 text-center">
             <img 
-              src="https://via.placeholder.com/500x400/ffffff/007bff?text=MyStore" 
-              alt="MyStore Hero" 
+              src="https://via.placeholder.com/500x400/ffffff/007bff?text=TechNest" 
+              alt="TechNest Hero" 
               className="img-fluid rounded shadow"
             />
           </div>

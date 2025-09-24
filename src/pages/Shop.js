@@ -8,7 +8,8 @@ const allProducts = [
     price: 49.99,
     image: "https://via.placeholder.com/300x300/007bff/ffffff?text=Headphones",
     category: "Electronics",
-    rating: 4.5
+    rating: 4.5,
+    description: "High-quality wireless headphones with noise cancellation."
   },
   {
     id: 2,
@@ -16,7 +17,8 @@ const allProducts = [
     price: 59.99,
     image: "https://via.placeholder.com/300x300/28a745/ffffff?text=Smart+Watch",
     category: "Electronics",
-    rating: 4.3
+    rating: 4.3,
+    description: "Advanced smartwatch with fitness tracking features."
   },
   {
     id: 3,
@@ -24,7 +26,8 @@ const allProducts = [
     price: 79.99,
     image: "https://via.placeholder.com/300x300/dc3545/ffffff?text=Backpack",
     category: "Accessories",
-    rating: 4.7
+    rating: 4.7,
+    description: "Durable and stylish backpack for professionals."
   },
   {
     id: 4,
@@ -32,7 +35,8 @@ const allProducts = [
     price: 89.99,
     image: "https://via.placeholder.com/300x300/ffc107/000000?text=Speaker",
     category: "Electronics",
-    rating: 4.2
+    rating: 4.2,
+    description: "Powerful Bluetooth speaker with amazing sound quality."
   },
   {
     id: 5,
@@ -40,7 +44,8 @@ const allProducts = [
     price: 29.99,
     image: "https://via.placeholder.com/300x300/6f42c1/ffffff?text=Phone+Case",
     category: "Accessories",
-    rating: 4.0
+    rating: 4.0,
+    description: "Protective phone case with stylish design."
   },
   {
     id: 6,
@@ -48,7 +53,8 @@ const allProducts = [
     price: 19.99,
     image: "https://via.placeholder.com/300x300/20c997/ffffff?text=USB+Cable",
     category: "Accessories",
-    rating: 4.1
+    rating: 4.1,
+    description: "Fast charging USB-C cable for all your devices."
   }
 ];
 

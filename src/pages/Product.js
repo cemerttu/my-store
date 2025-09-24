@@ -1,192 +1,237 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
-const Cart = () => {
-  const { cart, updateQuantity, removeFromCart, clearCart, getCartTotal, getDiscountedTotal, applyCoupon, removeCoupon } = useApp();
-  const [couponCode, setCouponCode] = useState("");
+const productData = {
+  1: { 
+    id: 1,
+    name: "Wireless Bluetooth Headphones", 
+    price: 49.99, 
+    originalPrice: 69.99,
+    description: "High-quality wireless headphones with noise cancellation. Perfect for music lovers and professionals.", 
+    image: "https://via.placeholder.com/500x500/007bff/ffffff?text=Headphones",
+    features: ["Noise Cancellation", "30hr Battery", "Quick Charge", "Comfort Fit"],
+    category: "Electronics",
+    rating: 4.5,
+    stock: 15,
+    reviews: 124
+  },
+  2: { 
+    id: 2,
+    name: "Smart Fitness Watch", 
+    price: 59.99, 
+    originalPrice: 79.99,
+    description: "Track your fitness goals with this advanced smartwatch featuring heart rate monitoring and GPS.", 
+    image: "https://via.placeholder.com/500x500/28a745/ffffff?text=Smart+Watch",
+    features: ["Heart Rate Monitor", "GPS Tracking", "Water Resistant", "Sleep Tracking"],
+    category: "Electronics",
+    rating: 4.3,
+    stock: 8,
+    reviews: 89
+  },
+  3: { 
+    id: 3,
+    name: "Professional Laptop Backpack", 
+    price: 79.99, 
+    description: "Durable and stylish backpack with dedicated laptop compartment and multiple organizational pockets.", 
+    image: "https://via.placeholder.com/500x500/dc3545/ffffff?text=Backpack",
+    features: ["Laptop Compartment", "Water Resistant", "USB Charging Port", "Ergonomic Design"],
+    category: "Accessories",
+    rating: 4.7,
+    stock: 25,
+    reviews: 203
+  },
+};
 
-  const calculateSubtotal = () => {
-    return getCartTotal();
-  };
-
-  const calculateShipping = () => {
-    const subtotal = getDiscountedTotal();
-    if (cart.coupon?.freeShipping) return 0;
-    return subtotal > 50 ? 0 : 9.99;
-  };
-
-  const calculateTax = () => {
-    return getDiscountedTotal() * 0.08; // 8% tax
-  };
-
-  const calculateTotal = () => {
-    return getDiscountedTotal() + calculateShipping() + calculateTax();
-  };
-
-  const handleApplyCoupon = () => {
-    if (couponCode.trim()) {
-      applyCoupon(couponCode.toUpperCase());
-      setCouponCode("");
+const Product = () => {
+  const { id } = useParams();
+  const { addToCart, toggleWishlist, isInWishlist, addToRecentlyViewed } = useApp();
+  const [quantity, setQuantity] = useState(1);
+  const [isAdding, setIsAdding] = useState(false);
+  const [activeImage, setActiveImage] = useState(0);
+  const [isWishlisted, setIsWishlisted] = useState(false);
+  
+  const product = productData[id];
+  
+  useEffect(() => {
+    if (product) {
+      setIsWishlisted(isInWishlist(product.id));
+      addToRecentlyViewed(product);
     }
-  };
+  }, [product, isInWishlist, addToRecentlyViewed]);
 
-  if (cart.items.length === 0) {
+  if (!product) {
     return (
       <div className="container my-5">
-        <div className="row">
-          <div className="col-lg-8 mx-auto">
-            <div className="card">
-              <div className="card-body text-center py-5">
-                <i className="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
-                <h3 className="text-muted">Your cart is empty</h3>
-                <p className="text-muted mb-4">Start shopping to add items to your cart</p>
-                <Link to="/shop" className="btn btn-primary btn-lg">Continue Shopping</Link>
-              </div>
-            </div>
-          </div>
+        <div className="text-center">
+          <h2>Product Not Found</h2>
+          <Link to="/shop" className="btn btn-primary mt-3">Back to Shop</Link>
         </div>
       </div>
     );
   }
 
+  const handleQuantityChange = (change) => {
+    const newQuantity = quantity + change;
+    if (newQuantity >= 1 && newQuantity <= 10) {
+      setQuantity(newQuantity);
+    }
+  };
+
+  const handleAddToCart = () => {
+    setIsAdding(true);
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+    setTimeout(() => {
+      setIsAdding(false);
+      setQuantity(1);
+    }, 1000);
+  };
+
+  const handleWishlistToggle = () => {
+    setIsWishlisted(!isWishlisted);
+    toggleWishlist(product);
+  };
+
+  const productImages = [
+    product.image,
+    "https://via.placeholder.com/500x500/007bff/ffffff?text=Headphones+Angle",
+    "https://via.placeholder.com/500x500/007bff/ffffff?text=Headphones+Case"
+  ];
+
   return (
     <div className="container my-5">
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+          <li className="breadcrumb-item"><Link to="/shop">Shop</Link></li>
+          <li className="breadcrumb-item active">{product.name}</li>
+        </ol>
+      </nav>
+      
       <div className="row">
-        <div className="col-lg-8">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <h1>Shopping Cart ({cart.items.length} items)</h1>
-            <button className="btn btn-outline-danger btn-sm" onClick={clearCart}>
-              Clear Cart
+        <div className="col-md-6">
+          <div className="product-gallery">
+            <div className="main-image mb-3">
+              <img 
+                src={productImages[activeImage]} 
+                alt={product.name} 
+                className="img-fluid rounded shadow w-100"
+                style={{maxHeight: "500px", objectFit: "cover"}}
+              />
+            </div>
+            <div className="image-thumbnails d-flex gap-2">
+              {productImages.map((img, index) => (
+                <button
+                  key={index}
+                  className={`btn btn-outline-secondary ${activeImage === index ? 'active' : ''}`}
+                  onClick={() => setActiveImage(index)}
+                  style={{padding: '2px'}}
+                >
+                  <img src={img} alt={`${product.name} ${index + 1}`} style={{width: '60px', height: '60px', objectFit: 'cover'}} />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <div className="col-md-6">
+          <h1 className="fw-bold">{product.name}</h1>
+          <div className="d-flex align-items-center mb-3">
+            <div className="text-warning me-2">
+              {"★".repeat(Math.floor(product.rating))}☆
+              <span className="text-muted ms-2">({product.rating})</span>
+            </div>
+            <span className="badge bg-secondary ms-3">{product.category}</span>
+            <span className="badge bg-success ms-2">{product.stock} in stock</span>
+          </div>
+          
+          <div className="price-section mb-3">
+            <h3 className="text-primary mb-0">${product.price}</h3>
+            {product.originalPrice && (
+              <small className="text-muted text-decoration-line-through ms-2">
+                ${product.originalPrice}
+              </small>
+            )}
+            {product.originalPrice && (
+              <span className="badge bg-danger ms-2">
+                Save ${(product.originalPrice - product.price).toFixed(2)}
+              </span>
+            )}
+          </div>
+          
+          <p className="lead">{product.description}</p>
+          
+          <div className="mb-4">
+            <h6>Key Features:</h6>
+            <div className="row">
+              {product.features.map((feature, index) => (
+                <div key={index} className="col-6 mb-2">
+                  <i className="fas fa-check text-success me-2"></i>
+                  {feature}
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="d-flex gap-3 mb-4 align-items-center">
+            <div className="d-flex align-items-center">
+              <label className="me-2 fw-bold">Quantity:</label>
+              <div className="input-group" style={{width: '140px'}}>
+                <button 
+                  className="btn btn-outline-secondary"
+                  onClick={() => handleQuantityChange(-1)}
+                >
+                  -
+                </button>
+                <input 
+                  type="text" 
+                  className="form-control text-center" 
+                  value={quantity} 
+                  readOnly 
+                />
+                <button 
+                  className="btn btn-outline-secondary"
+                  onClick={() => handleQuantityChange(1)}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div className="d-flex gap-2 mb-4">
+            <button 
+              className={`btn btn-primary btn-lg flex-fill ${isAdding ? 'disabled' : ''}`}
+              onClick={handleAddToCart}
+              disabled={isAdding}
+            >
+              {isAdding ? (
+                <>
+                  <i className="fas fa-check me-2"></i>
+                  Added to Cart!
+                </>
+              ) : (
+                <>
+                  <i className="fas fa-shopping-cart me-2"></i>
+                  Add to Cart (${(product.price * quantity).toFixed(2)})
+                </>
+              )}
             </button>
           </div>
           
-          {cart.items.map((item) => (
-            <div key={item.id} className="card mb-3">
-              <div className="card-body">
-                <div className="row align-items-center">
-                  <div className="col-md-2">
-                    <img src={item.image} alt={item.name} className="img-fluid rounded" />
-                  </div>
-                  <div className="col-md-4">
-                    <h5 className="card-title">{item.name}</h5>
-                    <p className="text-muted">${item.price}</p>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="input-group">
-                      <button 
-                        className="btn btn-outline-secondary"
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      >
-                        -
-                      </button>
-                      <input 
-                        type="text" 
-                        className="form-control text-center" 
-                        value={item.quantity} 
-                        readOnly 
-                      />
-                      <button 
-                        className="btn btn-outline-secondary"
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <div className="col-md-2">
-                    <h5 className="text-primary">${(item.price * item.quantity).toFixed(2)}</h5>
-                  </div>
-                  <div className="col-md-1">
-                    <button 
-                      className="btn btn-outline-danger"
-                      onClick={() => removeFromCart(item.id)}
-                    >
-                      <i className="fas fa-trash"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="col-lg-4">
-          <div className="card sticky-top" style={{top: '100px'}}>
-            <div className="card-header bg-light">
-              <h5 className="mb-0">Order Summary</h5>
-            </div>
-            <div className="card-body">
-              <div className="d-flex justify-content-between mb-2">
-                <span>Subtotal:</span>
-                <span>${calculateSubtotal().toFixed(2)}</span>
-              </div>
-              
-              {cart.coupon && (
-                <>
-                  <div className="d-flex justify-content-between mb-2 text-success">
-                    <span>Discount ({cart.coupon.code}):</span>
-                    <span>-${(calculateSubtotal() - getDiscountedTotal()).toFixed(2)}</span>
-                  </div>
-                  <div className="d-flex justify-content-between mb-2">
-                    <span>After Discount:</span>
-                    <span>${getDiscountedTotal().toFixed(2)}</span>
-                  </div>
-                </>
-              )}
-              
-              <div className="d-flex justify-content-between mb-2">
-                <span>Shipping:</span>
-                <span>{calculateShipping() === 0 ? 'FREE' : `$${calculateShipping().toFixed(2)}`}</span>
-              </div>
-              <div className="d-flex justify-content-between mb-3">
-                <span>Tax:</span>
-                <span>${calculateTax().toFixed(2)}</span>
-              </div>
-              
-              {/* Coupon Section */}
-              <div className="mb-3">
-                <div className="input-group">
-                  <input 
-                    type="text" 
-                    className="form-control" 
-                    placeholder="Coupon code" 
-                    value={couponCode}
-                    onChange={(e) => setCouponCode(e.target.value)}
-                  />
-                  <button className="btn btn-outline-primary" onClick={handleApplyCoupon}>
-                    Apply
-                  </button>
-                </div>
-                {cart.coupon && (
-                  <div className="mt-2">
-                    <small className="text-success">
-                      Applied: {cart.coupon.code} 
-                      <button 
-                        className="btn btn-link text-danger p-0 ms-2" 
-                        onClick={removeCoupon}
-                        style={{fontSize: '0.7rem'}}
-                      >
-                        Remove
-                      </button>
-                    </small>
-                  </div>
-                )}
-                <small className="text-muted">Try: WELCOME10, SAVE20, FREESHIP</small>
-              </div>
-              
-              <hr />
-              <div className="d-flex justify-content-between mb-3">
-                <strong>Total:</strong>
-                <strong>${calculateTotal().toFixed(2)}</strong>
-              </div>
-              <button className="btn btn-primary w-100 btn-lg">
-                Proceed to Checkout
-              </button>
-              <Link to="/shop" className="btn btn-outline-primary w-100 mt-2">
-                Continue Shopping
-              </Link>
-            </div>
+          <div className="d-flex gap-2">
+            <button 
+              className={`btn btn-outline-secondary ${isWishlisted ? 'active' : ''}`}
+              onClick={handleWishlistToggle}
+            >
+              <i className={`fas fa-heart me-2 ${isWishlisted ? 'text-danger' : ''}`}></i>
+              {isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
+            </button>
+            <button className="btn btn-outline-secondary">
+              <i className="fas fa-share me-2"></i>Share
+            </button>
           </div>
         </div>
       </div>
@@ -194,4 +239,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Product;
