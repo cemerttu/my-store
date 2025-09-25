@@ -9,12 +9,12 @@ const Navbar = () => {
 
   useEffect(() => {
     setCartCount(3);
-    
+
     // Apply dark mode class to body
     if (isDarkMode) {
-      document.body.classList.add('dark-mode');
+      document.body.classList.add("dark-mode");
     } else {
-      document.body.classList.remove('dark-mode');
+      document.body.classList.remove("dark-mode");
     }
   }, [isDarkMode]);
 
@@ -29,40 +29,72 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg navbar-dark ${isDarkMode ? 'bg-dark' : 'bg-primary'} sticky-top shadow`}>
+    <nav
+      className={`navbar navbar-expand-lg navbar-dark ${
+        isDarkMode ? "bg-dark" : "bg-primary"
+      } sticky-top shadow`}
+    >
       <div className="container">
-        <Link className="navbar-brand fw-bold d-flex align-items-center" to="/">
+        <Link
+          className="navbar-brand fw-bold d-flex align-items-center stylehub-white"
+          to="/"
+        >
           <i className="fas fa-crown me-2"></i>
           StyleHub
         </Link>
-        
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
-        
+
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
-              <Link className={`nav-link ${isActive("/") ? "active" : ""}`} to="/">Home</Link>
+              <Link
+                className={`nav-link ${isActive("/") ? "active" : ""}`}
+                to="/"
+              >
+                Home
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link ${isActive("/shop") ? "active" : ""}`} to="/shop">Shop</Link>
+              <Link
+                className={`nav-link ${isActive("/shop") ? "active" : ""}`}
+                to="/shop"
+              >
+                Shop
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link ${isActive("/about") ? "active" : ""}`} to="/about">About</Link>
+              <Link
+                className={`nav-link ${isActive("/about") ? "active" : ""}`}
+                to="/about"
+              >
+                About
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link ${isActive("/contact") ? "active" : ""}`} to="/contact">Contact</Link>
+              <Link
+                className={`nav-link ${isActive("/contact") ? "active" : ""}`}
+                to="/contact"
+              >
+                Contact
+              </Link>
             </li>
           </ul>
-          
+
           {/* Search Bar */}
           <form className="d-flex me-3" onSubmit={handleSearch}>
-            <div className="input-group" style={{width: "250px"}}>
-              <input 
-                type="text" 
-                className="form-control" 
-                placeholder="Search products..." 
+            <div className="input-group" style={{ width: "250px" }}>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -71,19 +103,21 @@ const Navbar = () => {
               </button>
             </div>
           </form>
-          
+
           <ul className="navbar-nav">
             {/* Dark Mode Toggle */}
             <li className="nav-item">
-              <button 
+              <button
                 className="btn btn-link nav-link"
                 onClick={() => setIsDarkMode(!isDarkMode)}
-                title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                title={
+                  isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
+                }
               >
-                <i className={`fas ${isDarkMode ? 'fa-sun' : 'fa-moon'}`}></i>
+                <i className={`fas ${isDarkMode ? "fa-sun" : "fa-moon"}`}></i>
               </button>
             </li>
-            
+
             <li className="nav-item">
               <Link className="nav-link position-relative" to="/cart">
                 <i className="fas fa-shopping-bag me-1"></i>
