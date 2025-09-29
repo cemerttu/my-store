@@ -5,7 +5,7 @@ const Footer = () => (
     <div className="container">
       <div className="row">
         <div className="col-lg-4 col-md-6 mb-4">
-          <h5 className="fw-bold mb-3">StyleHub</h5>
+          <h6 className="fw-bold mb-3">StyleHub</h6>
           <p>Your premier destination for fashion-forward clothing and accessories. Elevate your style with our curated collections.</p>
           <div className="d-flex gap-3">
             <a href="#" className="text-white"><i className="fab fa-facebook fa-lg"></i></a>

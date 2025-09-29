@@ -1,77 +1,59 @@
-/* ===== CSS Reset ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  /* Color Variables */
-  --primary-color: #667eea;
-  --primary-dark: #5a6fd8;
-  --secondary-color: #764ba2;
-  --accent-color: #ff6b6b;
-  --text-dark: #2d3748;
-  --text-light: #718096;
-  --bg-light: #f7fafc;
-  --bg-white: #ffffff;
-  --border-color: #e2e8f0;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-
-  /* Dark Mode Variables */
-  --dark-bg: #1a202c;
-  --dark-card: #2d3748;
-  --dark-text: #e2e8f0;
-  --dark-border: #4a5568;
-}
-
-/* ===== Base Styles ===== */
-body {
-  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-  line-height: 1.6;
-  color: var(--text-dark);
-  background-color: var(--bg-light);
-  transition: all 0.3s ease;
-}
-
-body.dark-mode {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* ===== Typography ===== */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 700;
-  line-height: 1.2;
+/* Hero section for Elevate Your Style with StyleHub */
+.elevate-hero {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
+  color: #ffffff;
+  text-align: center;
+  position: relative;
   margin-bottom: 1rem;
 }
 
-h1 {
-  font-size: 3rem;
+.elevate-hero-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 1.2rem;
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.25);
 }
-h2 {
-  font-size: 2.5rem;
+
+/* Hide/show navbar on scroll */
+.navbar-hide {
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-h3 {
-  font-size: 2rem;
+.navbar-show {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.95) !important;
+  transition: box-shadow 0.3s, background 0.3s,
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-h4 {
-  font-size: 1.5rem;
+.navbar-show {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  background: linear-gradient(
+    90deg,
+    rgba(17, 17, 17, 0.98) 60%,
+    rgba(240, 240, 255, 0.95) 100%
+  ) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.07);
+  animation: navbarFadeIn 0.4s;
+  transition: box-shadow 0.3s, background 0.3s,
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-h5 {
-  font-size: 1.25rem;
+
+@keyframes navbarFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 h6 {
   font-size: 1rem;
@@ -196,7 +178,7 @@ body.dark-mode .lead {
 }
 
 .btn-light:hover {
-  background: #f1f5f9;
+  background: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -208,7 +190,7 @@ body.dark-mode .lead {
 
 .btn-outline:hover {
   background: currentColor;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 /* ===== Cards ===== */
@@ -231,12 +213,12 @@ body.dark-mode .card {
 }
 
 .card-body {
-  padding: 1.5rem;
+  padding:1.8rem;
 }
 
 /* ===== Navbar ===== */
 .navbar {
-  background: var(--bg-white);
+  background: transparent !important;
   box-shadow: var(--shadow);
   position: fixed;
   top: 0;
@@ -262,7 +244,7 @@ body.dark-mode .navbar {
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: #000;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -270,12 +252,13 @@ body.dark-mode .navbar {
 }
 
 /* Make StyleHub brand white and remove hover */
-.stylehub-white {
-  color: #fff !important;
+/* StyleHub logo black color */
+.stylehub-black {
+  color: #110b0b !important;
 }
-.stylehub-white:hover,
-.stylehub-white:focus {
-  color: #fff !important;
+.stylehub-black:hover,
+.stylehub-black:focus {
+  color: #283382 !important;
   text-decoration: none;
   cursor: default;
 }
@@ -301,7 +284,7 @@ body.dark-mode .nav-link {
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--primary-color);
+  color: #4268d2;
 }
 
 .nav-link.active::after {
@@ -312,6 +295,7 @@ body.dark-mode .nav-link {
   width: 100%;
   height: 2px;
   background: var(--primary-color);
+  color: #000;
 }
 
 /* ===== Hero Section ===== */

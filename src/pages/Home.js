@@ -5,9 +5,8 @@ const products = [
   {
     id: 1,
     name: "Men's Casual Blazer",
-    price: 89.99,
-    image:
-      "https://via.placeholder.com/300x400/2c3e50/ffffff?text=Men's+Blazer",
+    price: 8999,
+    image: require("../image/men/images.jpg4.jpg"),
     category: "Men's Fashion",
     gender: "men",
     rating: 4.8,
@@ -15,29 +14,26 @@ const products = [
   {
     id: 2,
     name: "Women's Summer Dress",
-    price: 59.99,
-    image:
-      "https://via.placeholder.com/300x400/e74c3c/ffffff?text=Women's+Dress",
+    price: 5999,
+    image: require("../image/Women/download.jpg"),
     category: "Women's Fashion",
     gender: "women",
     rating: 4.6,
   },
   {
     id: 3,
-    name: "Unisex Backpack",
-    price: 49.99,
-    image:
-      "https://via.placeholder.com/300x400/27ae60/ffffff?text=Designer+Backpack",
-    category: "Accessories",
-    gender: "unisex",
+    name: "Men in black",
+    price: 4990,
+    image: require("../Assets/download.jpg3.jpg"),
+    category: "men",
+    gender: "men",
     rating: 4.7,
   },
   {
     id: 4,
     name: "Men's Running Shoes",
-    price: 79.99,
-    image:
-      "https://via.placeholder.com/300x400/3498db/ffffff?text=Running+Shoes",
+    price: 7999,
+    image: require("../image/men/download.jpg2.jpg"),
     category: "Men's Footwear",
     gender: "men",
     rating: 4.5,
@@ -45,9 +41,8 @@ const products = [
   {
     id: 5,
     name: "Women's Handbag",
-    price: 69.99,
-    image:
-      "https://via.placeholder.com/300x400/9b59b6/ffffff?text=Designer+Handbag",
+    price: 6999,
+    image: require("../image/Women/Group_Copy_4_12be3b22-52a8-44a4-8bc9-0e74bc3c4ddd.webp"),
     category: "Women's Accessories",
     gender: "women",
     rating: 4.9,
@@ -55,8 +50,8 @@ const products = [
   {
     id: 6,
     name: "Smart Watch",
-    price: 99.99,
-    image: "https://via.placeholder.com/300x400/34495e/ffffff?text=Smart+Watch",
+    price: 9999,
+    image: require("../Assets/hero-fashion.jpg"),
     category: "Electronics",
     gender: "unisex",
     rating: 4.4,
@@ -65,55 +60,21 @@ const products = [
 
 const Home = () => (
   <div>
-    {/* Hero Section with Product Image */}
-    <section
-      className="hero-section position-relative"
-      style={{ overflow: "hidden" }}
-    >
-      <video
-        className="hero-bg-video position-absolute w-100 h-100"
-        style={{ objectFit: "cover", top: 0, left: 0, zIndex: 0 }}
-        src={require("../image/Fashion Lookbook Vlog PH Trend YouTube Thumbnail in Grey White Aesthetic Chic Minimal Style.mp4")}
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
-      <div className="hero-overlay position-absolute w-100 h-100"></div>
+    {/* Hero Section with hero-fashion.jpg background */}
+    <section className="elevate-hero">
       <div className="container position-relative" style={{ zIndex: 2 }}>
-        <div className="row align-items-center">
-          <div className="col-lg-6">
-            <h1 className="display-4 fw-bold mb-3">
-              Elevate Your Style with StyleHub
-            </h1>
-            <p className="lead mb-4">
-              Discover the latest trends in fashion for men and women. Quality
-              meets style in every piece.
-            </p>
-            <a href="/shop" className="btn btn-light btn-lg px-4 me-3">
-              <i className="fas fa-shopping-bag me-2"></i>
-              Shop Now
-            </a>
-            <a
-              href="#best-sellers"
-              className="btn btn-outline-light btn-lg px-4"
-            >
-              Explore Collection
-            </a>
-          </div>
-          <div className="col-lg-6 text-center">
-            <img
-              src={require("../image/haste-outfit.jpg")}
-              alt="Featured Clothing Product"
-              className="img-fluid hero-product-image shadow-lg rounded"
-              style={{
-                maxHeight: "500px",
-                objectFit: "cover",
-                border: "6px solid #fff",
-              }}
-            />
-          </div>
-        </div>
+        <h1 className="elevate-hero-title">Elevate Your Style with StyleHub</h1>
+        <p className="lead mb-4">
+          Discover the latest trends in fashion for men and women. Quality meets
+          style in every piece.
+        </p>
+        <a href="/shop" className="btn btn-light btn-lg px-4 me-3">
+          <i className="fas fa-shopping-bag me-2"></i>
+          Shop Now
+        </a>
+        <a href="#best-sellers" className="btn btn-outline-light btn-lg px-4">
+          Explore Collection
+        </a>
       </div>
     </section>
 
@@ -152,6 +113,12 @@ const Home = () => (
       <div className="row mb-5">
         <div className="col-md-6 mb-4">
           <div className="category-card men-category text-center p-5 rounded">
+            <img
+              src={require("../Assets/collection-men.jpg")}
+              alt="Men's Collection"
+              className="img-fluid mb-3"
+              style={{ maxHeight: 220, borderRadius: 12 }}
+            />
             <h3 className="text-white mb-3">Men's Collection</h3>
             <p className="text-white mb-4">
               Sophisticated styles for the modern man
@@ -163,6 +130,12 @@ const Home = () => (
         </div>
         <div className="col-md-6 mb-4">
           <div className="category-card women-category text-center p-5 rounded">
+            <img
+              src={require("../Assets/collection-women.jpg")}
+              alt="Women's Collection"
+              className="img-fluid mb-3"
+              style={{ maxHeight: 220, borderRadius: 12 }}
+            />
             <h3 className="text-white mb-3">Women's Collection</h3>
             <p className="text-white mb-4">
               Elegant fashion for every occasion

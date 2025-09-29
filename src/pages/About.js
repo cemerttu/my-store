@@ -21,17 +21,12 @@ const About = () => (
             <p className="text-muted">Happy Customers</p>
           </div>
           <div className="col-6">
-            <h3 className="text-primary">500+</h3>
+            <h3 className="text-primary">5000+</h3>
             <p className="text-muted">Products</p>
           </div>
         </div>
       </div>
       <div className="col-lg-6">
-        <img 
-          src="https://via.placeholder.com/500x400/6c757d/ffffff?text=Our+Team" 
-          alt="About Us" 
-          className="img-fluid rounded shadow"
-        />
       </div>
     </div>
   </div>
